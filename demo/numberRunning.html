@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NumberRunning Demo</title>
+  </head>
+  <style>
+    @import url('//fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+    body {
+      text-align: center;
+      font-size: 72px;
+      font-family: 'Pacifico', cursive;
+    }
+  </style>
+  <body>
+    <div class="number-running N1" data-start="1" data-end="200"></div>
+    <div class="number-running N2" data-start="10" data-end="300"></div>
+    <div class="number-running N3" data-start="10" data-end="400"></div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    $(window).on("load", function() {
+
+      action();
+
+    });
+    
+    function action(){
+      $('.number-running').each(function(){
+        var num_start=0;
+        var num_end=0;
+        num_start= $(this).data('start');
+        num_end= $(this).data('end');
+
+        console.log($(this));
+        console.log(num_start);
+        console.log(num_end);
+        
+        numberRunner(num_start, num_end, 200, $(this));
+      
+      });
+    }
+
+    
+    function numberRunner(initNum = 1000, endNum = 3000, ms = 1000, dom) {
+        var timer;
+        var baseNum = 0;
+        
+        baseNum = (endNum - initNum) / ms;
+        
+        timer = setInterval(()=>{
+            initNum = initNum + baseNum;
+            
+            if (baseNum > 0) {
+                if (initNum >= endNum) {
+                    clearInterval(timer);
+                    initNum = endNum;
+                }
+            } else if (baseNum < 0) {
+                if (initNum <= endNum) {
+                    clearInterval(timer);
+                    initNum = endNum;
+                }
+            } else {
+                clearInterval(timer);
+            }
+            
+            dom.text(Math.floor(initNum));
+        }, 1);
+    }
+
+  </script>
+</html>
