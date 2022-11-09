@@ -35,24 +35,21 @@
     // 接到 message 要做什麼事的 function
     function receiveMessage(e) {
       // 來源網址（e.origin）不是指定的網域時
-      // if(e.origin !== 'https://190.trikeys.club/Gaea/index.html') {
-      //   alert('資料來源錯誤 index2'+"from github");
-      //   console.log(e.origin);
-      //   return false;
-      // }
+      if(e.origin !== 'https://190.trikeys.club/') {
+        alert('資料來源錯誤 index2'+"from github");
+        console.log(e.origin);
+        return false;
+      }
       // 來源網址是指定的網域時
-      // else {
-        // 拿傳來的參數（e.data）
-      //   const bgColor = e.data;
-      //   console.log(e.data);
-      //   document.querySelector('.box').setAttribute('style', 'background: ' + bgColor);
-      // }
-
-
+      else {
         // 拿傳來的參數（e.data）
         const bgColor = e.data;
         console.log(e.data);
         document.querySelector('.box').setAttribute('style', 'background: ' + bgColor);
+      }
+
+
+        
       
     }
 
